@@ -1,5 +1,28 @@
 # AngularTests
 
+## Lazy loading : 
+
+Good practice : separate material imports and lazy load modules :
+
+**AppModule (source routing)**
+```typescript
+const routes: Routes = [
+  {path: 'a', loadChildren: () => import('./a/a.module').then(m => m.AModule)},
+  {path: 'b', loadChildren: () => import('./b/b.module').then(m => m.BModule)},
+  {path: 'c', loadChildren: () => import('./c/c.module').then(m => m.CModule)},
+  {path: 'd', loadChildren: () => import('./d/d.module').then(m => m.DModule)},
+];
+```
+**Target Module (source routing)**
+
+Bad :
+
+~~import {MatButtonModule} from '@angular/material';~~
+
+Good :
+```typescript
+import {MatButtonModule} from '@angular/material/button';
+```
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.15.
 
 ## Development server
